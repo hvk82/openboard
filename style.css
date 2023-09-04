@@ -40,8 +40,57 @@ body {
 .pencil-tool-cont {
   top: 7rem;
   left: 20vw;
-  width: 8rem;
+  width: 7rem;
   height: 5rem;
   position: absolute;
-  background-color: aqua;
+  background-color: #dfe6e9;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  border-radius: 3px;
+}
+.pencil-width-cont {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pencil-color-cont {
+  height: calc(100% - 2rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.pencil-color {
+  width: 1.5rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+.pencil-width-cont input {
+  width: 80%;
+}
+.black {
+  background-color: black;
+}
+.blue {
+  background-color: blue;
+}
+.red {
+  background-color: red;
+}
+.eraser-tool-cont {
+  background-color: #dfe6e9;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  position: absolute;
+  top: 7rem;
+  left: 28vw;
+  width: 7rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.eraser-tool-cont input {
+  width: 80%;
 }
