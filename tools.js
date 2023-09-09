@@ -6,6 +6,7 @@ let eraserToolCont = document.querySelector(".eraser-tool-cont");
 let pencil = document.querySelector(".pencil");
 let eraser = document.querySelector(".eraser");
 let sticky = document.querySelector(".sticky");
+let upload = document.querySelector(".upload");
 let pencilFlag = false;
 let eraserFlag = false;
 
@@ -39,28 +40,54 @@ eraser.addEventListener("click", (e) => {
   if (eraserFlag) eraserToolCont.style.display = "block";
   else eraserToolCont.style.display = "none";
 });
-sticky.addEventListener("click", (e) => {
-  let stickyCont = document.createElement("div");
-  stickyCont.setAttribute("class", "sticky-cont");
-  stickyCont.innerHTML = `
-  <div class="header-cont">
+
+upload.addEventListener("click", (e) => {
+  //making filr explore
+  let input = document.createElement("input");
+  input.setAttribute("type", "file");
+  input.click();
+
+  input.addEventListener("change", (e) => {
+    let file = input.files[0];
+
+    let url = URL.createObjectURL(file);
+    let stickyTemplateHtml = `
+    <div class="header-cont">
         <div class="minimize"></div>
         <div class="remove"></div>
       </div>
       <div class="note-cont">
-        <textarea></textarea>
+        <img src="${url}"/>
       </div>
-  `;
-  document.body.appendChild(stickyCont);
-
-  stickyCont.onmousedown = function (event) {
-    dragAndDrop(stickyCont, event);
-  };
-
-  stickyCont.ondragstart = function () {
-    return false;
-  };
+    `;
+    createSticky(stickyTemplateHtml);
+  });
 });
+
+sticky.addEventListener("click", (e) => {
+  let stickyTemplateHtml = `
+    <div class="header-cont">
+        <div class="minimize"></div>
+        <div class="remove"></div>
+      </div>
+      <div class="note-cont">
+        <textarea spellcheck="false"></textarea>
+      </div>
+    `;
+  createSticky(stickyTemplateHtml);
+});
+function noteActions(minimize, remove, stickyCont) {
+  remove.addEventListener("click", (e) => {
+    console.log("remove" + e);
+    stickyCont.remove();
+  });
+  minimize.addEventListener("click", (e) => {
+    let noteCont = stickyCont.querySelector(".note-cont");
+    let display = getComputedStyle(noteCont).getPropertyValue("display");
+    if (display === "none") noteCont.style.display = "block";
+    else noteCont.style.display = "none";
+  });
+}
 function dragAndDrop(element, event) {
   let shiftX = event.clientX - element.getBoundingClientRect().left;
   let shiftY = event.clientY - element.getBoundingClientRect().top;
@@ -89,5 +116,21 @@ function dragAndDrop(element, event) {
   element.onmouseup = function () {
     document.removeEventListener("mousemove", onMouseMove);
     element.onmouseup = null;
+  };
+}
+function createSticky(stickyTemplateHtml) {
+  let stickyCont = document.createElement("div");
+  stickyCont.setAttribute("class", "sticky-cont");
+  stickyCont.innerHTML = stickyTemplateHtml;
+  document.body.appendChild(stickyCont);
+  let minimize = stickyCont.querySelector(".minimize");
+  let remove = stickyCont.querySelector(".remove");
+  noteActions(minimize, remove, stickyCont);
+  stickyCont.onmousedown = function (event) {
+    dragAndDrop(stickyCont, event);
+  };
+
+  stickyCont.ondragstart = function () {
+    return false;
   };
 }
