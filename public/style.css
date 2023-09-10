@@ -157,11 +157,22 @@ img {
 .hide {
   display: none;
 }
-.camera:hover + .hide {
+/* .camera:hover + .hide {
   display: block;
   color: black;
   position: absolute;
   left: 4rem;
   width: 12rem;
   bottom: 0.5rem;
+} */
+.img_url {
+  display: block;
+}
+.input_img_url {
+  display: flex;
+  margin-top: 0.2rem;
+  gap: 1rem;
+  padding: 0.5rem;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }

@@ -79,16 +79,11 @@ redo.addEventListener("click", (e) => {
 });
 //add a function to undo rand redo
 
-//add a function to load image froma url
+//add a function to load image froma url start
 loadImg.addEventListener("click", (e) => {
-  if (track < undoRedoTracker.length - 1) track++;
-  let data = {
-    trackValue: track,
-    undoRedoTracker,
-  };
-  socket.emit("redoUndo", data);
+  socket.emit("loadImg", data);
 });
-//to load image from a url
+//to load image from a url end
 function undoRedoCanvas(trackObj) {
   track = trackObj.trackValue;
   if (track === 0) {
