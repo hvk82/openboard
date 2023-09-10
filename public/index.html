@@ -10,8 +10,9 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="icon" type="image/x-icon" href="./Icons/favicon.ico" />
     <link rel="stylesheet" href="style.css" />
-    <title>OpenBoard</title>
+    <title>SketchBoard</title>
   </head>
   <body>
     <div class="options-cont">
@@ -47,7 +48,9 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      let socket = io.connect("http://localhost:5000");
+      let socket = io.connect(
+        "https://my-sketchboard-c46e58e3543d.herokuapp.com/"
+      );
     </script>
     <script src="./tools.js"></script>
     <script src="./canvas.js"></script>
