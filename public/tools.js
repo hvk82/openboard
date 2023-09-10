@@ -7,6 +7,7 @@ let pencil = document.querySelector(".pencil");
 let eraser = document.querySelector(".eraser");
 let sticky = document.querySelector(".sticky");
 let upload = document.querySelector(".upload");
+
 let pencilFlag = false;
 let eraserFlag = false;
 

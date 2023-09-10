@@ -149,3 +149,19 @@ img {
   height: 100%;
   width: 100%;
 }
+.help-icon {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+}
+.hide {
+  display: none;
+}
+.camera:hover + .hide {
+  display: block;
+  color: black;
+  position: absolute;
+  left: 4rem;
+  width: 12rem;
+  bottom: 0.5rem;
+}

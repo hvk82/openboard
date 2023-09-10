@@ -3,6 +3,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let tool = canvas.getContext("2d");
 let pencilcolor = document.querySelectorAll(".pencil-color");
+let loadImg = document.querySelector(".camera");
 let pencilWidthElem = document.querySelector(".pencil-width");
 let eraserWidthElem = document.querySelector(".eraser-width");
 let download = document.querySelector(".download");
@@ -77,6 +78,17 @@ redo.addEventListener("click", (e) => {
   socket.emit("redoUndo", data);
 });
 //add a function to undo rand redo
+
+//add a function to load image froma url
+loadImg.addEventListener("click", (e) => {
+  if (track < undoRedoTracker.length - 1) track++;
+  let data = {
+    trackValue: track,
+    undoRedoTracker,
+  };
+  socket.emit("redoUndo", data);
+});
+//to load image from a url
 function undoRedoCanvas(trackObj) {
   track = trackObj.trackValue;
   if (track === 0) {
