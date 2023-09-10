@@ -30,20 +30,23 @@ tool.lineWidth = penWidth;
 let mouseDown = false;
 canvas.addEventListener("mousedown", (e) => {
   mouseDown = true;
-  beginPath({
+  let data = {
     x: e.clientX,
     y: e.clientY,
-  });
+  };
+  socket.emit("beginPath", data);
 });
 canvas.addEventListener("mousemove", (e) => {
+  let data;
   if (mouseDown) {
-    drawPath({
+    data = {
       x: e.clientX,
       y: e.clientY,
       color: eraserFlag ? eraserColor : penColor,
       width: eraserFlag ? eraserWidth : penWidth,
-    });
+    };
   }
+  socket.emit("drawPath", data);
 });
 canvas.addEventListener("mouseup", (e) => {
   mouseDown = false;
@@ -58,20 +61,20 @@ canvas.addEventListener("mouseup", (e) => {
 undo.addEventListener("click", (e) => {
   console.log("called undo");
   if (track > 0) track--;
-  let trackObj = {
+  let data = {
     trackValue: track,
     undoRedoTracker,
   };
-  console.log("track in undo" + track);
-  undoRedoCanvas(trackObj);
+  //console.log("track in undo" + track);
+  socket.emit("redoUndo", data);
 });
 redo.addEventListener("click", (e) => {
   if (track < undoRedoTracker.length - 1) track++;
-  let trackObj = {
+  let data = {
     trackValue: track,
     undoRedoTracker,
   };
-  undoRedoCanvas(trackObj);
+  socket.emit("redoUndo", data);
 });
 //add a function to undo rand redo
 function undoRedoCanvas(trackObj) {
@@ -130,4 +133,13 @@ download.addEventListener("click", (e) => {
   a.href = url;
   a.download = "board.jpg";
   a.click();
+});
+socket.on("beginPath", (data) => {
+  beginPath(data);
+});
+socket.on("drawPath", (data) => {
+  drawPath(data);
+});
+socket.on("redoUndo", (data) => {
+  undoRedoCanvas(data);
 });

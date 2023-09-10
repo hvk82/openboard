@@ -10,4 +10,13 @@ let server = app.listen(port, () => {
 let io = socket(server);
 io.on("connection", (socket) => {
   log("connectio made");
+  socket.on("beginPath", (data) => {
+    io.sockets.emit("beginPath", data);
+  });
+  socket.on("drawPath", (data) => {
+    io.sockets.emit("drawPath", data);
+  });
+  socket.on("redoUndo", (data) => {
+    io.sockets.emit("redoUndo", data);
+  });
 });
